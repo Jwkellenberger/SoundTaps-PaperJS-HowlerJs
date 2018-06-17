@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sound Taps!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/tabSoundsStyle.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.12/howler.js"></script>
+    <script type="text/javascript" src="assets/paperJs/paper-full.min.js"></script>
+
+
+    <script type="text/paperscript" canvas="fullCanvas">
+    
+        var myCircles = [];
+        var sounds = [];
+        var myCircle;
+        var maxPoint;
+        var point;
+        sounds[0] = new Howl({ src: ['assets/sounds/b/dotted-spiral.mp3'] });
+        sounds[1] = new Howl({ src: ['assets/sounds/a/veil.mp3'] });
+        sounds[2] = new Howl({ src: ['assets/sounds/a/bubbles.mp3'] });
+        sounds[3] = new Howl({ src: ['assets/sounds/a/dotted-spiral.mp3'] });
+        sounds[4] = new Howl({ src: ['assets/sounds/a/glimmer.mp3'] });
+        sounds[5] = new Howl({ src: ['assets/sounds/a/prism-1.mp3'] });
+        sounds[6] = new Howl({ src: ['assets/sounds/a/timer.mp3'] });
+        sounds[7] = new Howl({ src: ['assets/sounds/a/wipe.mp3'] });
+        sounds[8] = new Howl({ src: ['assets/sounds/b/moon.mp3'] });
+        sounds[9] = new Howl({ src: ['assets/sounds/b/piston-1.mp3'] });
+        sounds[10] = new Howl({ src: ['assets/sounds/b/piston-3.mp3'] });
+        sounds[11] = new Howl({ src: ['assets/sounds/b/prism-2.mp3'] });
+        sounds[12] = new Howl({ src: ['assets/sounds/b/prism-3.mp3'] });
+        sounds[13] = new Howl({ src: ['assets/sounds/b/strike.mp3'] });
+        sounds[14] = new Howl({ src: ['assets/sounds/b/suspension.mp3'] });
+        sounds[15] = new Howl({ src: ['assets/sounds/b/timer.mp3'] });
+        sounds[16] = new Howl({ src: ['assets/sounds/b/ufo.mp3'] });
+        sounds[17] = new Howl({ src: ['assets/sounds/b/veil.mp3'] });
+        sounds[18] = new Howl({ src: ['assets/sounds/c/bubbles.mp3'] });
+        sounds[19] = new Howl({ src: ['assets/sounds/c/clay.mp3'] });
+        sounds[20] = new Howl({ src: ['assets/sounds/c/dotted-spiral.mp3'] });
+        sounds[21] = new Howl({ src: ['assets/sounds/c/flash-1.mp3'] });
+        sounds[22] = new Howl({ src: ['assets/sounds/c/flash-2.mp3'] });
+        sounds[23] = new Howl({ src: ['assets/sounds/c/piston-1.mp3'] });
+        sounds[24] = new Howl({ src: ['assets/sounds/c/piston-3.mp3'] });
+        sounds[25] = new Howl({ src: ['assets/sounds/c/prism-2.mp3'] });
+        sounds[26] = new Howl({ src: ['assets/sounds/c/prism-3.mp3'] });
+        sounds[27] = new Howl({ src: ['assets/sounds/c/squiggle.mp3'] });
+        sounds[28] = new Howl({ src: ['assets/sounds/c/strike.mp3'] });
+        sounds[29] = new Howl({ src: ['assets/sounds/c/timer.mp3'] });
+        sounds[30] = new Howl({ src: ['assets/sounds/c/ufo.mp3'] });
+        sounds[31] = new Howl({ src: ['assets/sounds/c/veil.mp3'] });
+        sounds[32] = new Howl({ src: ['assets/sounds/c/wipe.mp3'] });
+        sounds[33] = new Howl({ src: ['assets/sounds/c/zig-zag.mp3'] });
+        sounds[34] = new Howl({ src: ['assets/sounds/d/bubbles.mp3'] });
+        sounds[35] = new Howl({ src: ['assets/sounds/d/clay.mp3'] });
+        sounds[36] = new Howl({ src: ['assets/sounds/d/confetti.mp3'] });
+        sounds[37] = new Howl({ src: ['assets/sounds/d/corona.mp3'] });
+        sounds[38] = new Howl({ src: ['assets/sounds/d/flash-1.mp3'] });
+        sounds[39] = new Howl({ src: ['assets/sounds/d/pinwheel.mp3'] });
+        sounds[40] = new Howl({ src: ['assets/sounds/d/piston-1.mp3'] });
+        sounds[41] = new Howl({ src: ['assets/sounds/d/prism-2.mp3'] });
+        sounds[42] = new Howl({ src: ['assets/sounds/d/prism-3.mp3'] });
+        sounds[43] = new Howl({ src: ['assets/sounds/d/splits.mp3'] });
+        sounds[44] = new Howl({ src: ['assets/sounds/d/squiggle.mp3'] });
+        sounds[45] = new Howl({ src: ['assets/sounds/d/strike.mp3'] });
+        sounds[46] = new Howl({ src: ['assets/sounds/d/timer.mp3'] });
+        sounds[47] = new Howl({ src: ['assets/sounds/d/ufo.mp3'] });
+        sounds[48] = new Howl({ src: ['assets/sounds/d/veil.mp3'] });
+        sounds[49] = new Howl({ src: ['assets/sounds/d/wipe.mp3'] });
+        sounds[50] = new Howl({ src: ['assets/sounds/d/zig-zag.mp3'] });
+
+        var keyData = {
+            q:{ color: "#4676FF", sound: sounds[Math.floor(Math.random()*sounds.length)]},
+            w:{ color: "#676FFG", sound: sounds[Math.floor(Math.random()*sounds.length)]},
+            e:{ color: "#4FB11F", sound: sounds[Math.floor(Math.random()*sounds.length)]},
+            r:{ color: "#FB11FC", sound: sounds[Math.floor(Math.random()*sounds.length)]},
+            t:{ color: "#B11DFC", sound: sounds[Math.floor(Math.random()*sounds.length)]},
+            y:{ color: "#11DFC1", sound: sounds[Math.floor(Math.random()*sounds.length)]},
+            u:{ color: "#1DFA1C", sound: sounds[Math.floor(Math.random()*sounds.length)]},
+            i:{ color: "#DFA191", sound: sounds[Math.floor(Math.random()*sounds.length)]},
+            o:{ color: "#FA19C5", sound: sounds[Math.floor(Math.random()*sounds.length)]},
+            p:{ color: "#A19C36", sound: sounds[Math.floor(Math.random()*sounds.length)]},
+            a:{ color: "#29C3DD", sound: sounds[Math.floor(Math.random()*sounds.length)]},
+            s:{ color: "#9C3DFF", sound: sounds[Math.floor(Math.random()*sounds.length)]},
+            d:{ color: "#C3DFF1", sound: sounds[Math.floor(Math.random()*sounds.length)]},
+            f:{ color: "#3DFF1B", sound: sounds[Math.floor(Math.random()*sounds.length)]},
+            g:{ color: "#DFF1B9", sound: sounds[Math.floor(Math.random()*sounds.length)]},
+            h:{ color: "#FF1B97", sound: sounds[Math.floor(Math.random()*sounds.length)]},
+            j:{ color: "#F1B97D", sound: sounds[Math.floor(Math.random()*sounds.length)]},
+            k:{ color: "#1B97DF", sound: sounds[Math.floor(Math.random()*sounds.length)]},
+            l:{ color: "#B97DF1", sound: sounds[Math.floor(Math.random()*sounds.length)]},
+            z:{ color: "#97DF13", sound: sounds[Math.floor(Math.random()*sounds.length)]},
+            x:{ color: "#7DF135", sound: sounds[Math.floor(Math.random()*sounds.length)]},
+            c:{ color: "#DF1357", sound: sounds[Math.floor(Math.random()*sounds.length)]},
+            v:{ color: "#F13579", sound: sounds[Math.floor(Math.random()*sounds.length)]},
+            b:{ color: "#13579B", sound: sounds[Math.floor(Math.random()*sounds.length)]},
+            n:{ color: "#3579BD", sound: sounds[Math.floor(Math.random()*sounds.length)]},
+            m:{ color: "#579BDF", sound: sounds[Math.floor(Math.random()*sounds.length)]},
+        }
+
+        function onKeyDown(event){
+            if(keyData[event.key]){
+                //text.content = 'The ' + event.key + ' key was pressed!';
+                maxPoint = new Point(view.size.width, view.size.height);
+                point = maxPoint * Point.random();
+                console.log(point);
+                myCircle = new Path.Circle(point, 450);
+                myCircle.fillColor= keyData[event.key].color;
+                keyData[event.key].sound.play();
+                myCircles.push(myCircle);
+            }
+        }   
+
+        function onFrame(event){
+            for(var i = 0; i<myCircles.length; i++){
+                //if(myCircles[i].)
+                myCircles[i].fillColor.hue +=1;
+                myCircles[i].scale(.9)
+                
+                if(myCircles[i].area < 3){
+                    myCircles[i].remove(); // remove the circle from the canvas
+                    myCircles.splice(i, 1); // remove the circle from the array
+                    i--; // decrement i so that the loop doesn't skip a circle because of .splice()
+                }
+            }
+        }
+    </script>
+
+</head>
+<body>
+    <canvas id="fullCanvas" resize></canvas>
+    <script type="text/javascript" src="assets/tabSoundsJs.js"></script>
+</body>
+</html>
