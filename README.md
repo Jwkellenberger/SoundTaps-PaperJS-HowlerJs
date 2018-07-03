@@ -13,3 +13,6 @@ The screen remains black until a key is pressed.
 The app uses Paper.js to randomly create a circle with its center placed at a point within the height and width of the screen.
 There is also a looping function within Paper.js that shrinks the circles every frame.
 If a circle's total area is under 3 px, the circle is removed.
+
+### The file appears mostly as HTML, BUT
+Paper js has custom methods and formatting only accessable via the paper.js import. As such, the js code is nested within the .html file for simplicities sake.
